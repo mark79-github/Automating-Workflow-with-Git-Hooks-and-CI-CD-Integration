@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "test": "jest"
+  }
+}
