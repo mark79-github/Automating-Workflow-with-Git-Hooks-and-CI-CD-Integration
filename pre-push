@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Running tests before push..."
+
+npx jest --coverage
+
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Push rejected. Please fix tests before pushing."
+  exit 1
+fi
+
+echo "Tests passed. Proceeding with push."
+exit 0

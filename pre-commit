@@ -1,0 +1,30 @@
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+echo "Running branch name formatting checks..."
+
+# Get current branch name
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Check if branch name starts with feature/
+if [[ ! "$current_branch" =~ ^feature/.+ ]]; then
+    echo "Branch name must start with 'feature/'"
+    echo "Current branch: $current_branch"
+    echo "Expected format: feature/your-feature-name"
+    exit 1
+fi
+
+echo "Branch name check passed: $current_branch"
+
+echo "Running prettier formatting checks..."
+
+npx prettier --check .
+
+if [ $? -ne 0 ]; then
+  echo "Prettier formatting errors found. Please fix before committing."
+  exit 1
+fi
+
+echo "All checks passed. Proceeding with commit."
+exit 0
